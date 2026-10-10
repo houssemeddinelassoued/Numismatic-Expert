@@ -1,0 +1,184 @@
+<title>Cabinet Numismatique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Marcellus+SC&display=swap">
+<link rel="stylesheet" href="cabinet.css">
+<link rel="stylesheet" href="cabinet-ext.css">
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <span class="brand"><span class="logo" aria-hidden="true"></span><span class="brand-t" data-t="brand">Cabinet Numismatique</span></span>
+    <nav class="tabs" role="tablist" aria-label="Cabinet">
+      <button type="button" class="tab" role="tab" data-tab="appraise" data-icon="spark"><span data-t="tabAppraise">Expertiser</span></button>
+      <button type="button" class="tab" role="tab" data-tab="collection" data-icon="grid"><span data-t="tabCollection">Collection</span><span class="tab-n" id="tabCount"></span></button>
+      <button type="button" class="tab" role="tab" data-tab="buy" data-icon="cart"><span data-t="tabBuy">Achat</span></button>
+      <button type="button" class="tab" role="tab" data-tab="dash" data-icon="chart"><span data-t="tabDash">Tableau de bord</span></button>
+      <button type="button" class="tab" role="tab" data-tab="import" data-icon="upload"><span data-t="tabImport">Import / Export</span></button>
+    </nav>
+    <div class="bar-r">
+      <button type="button" class="ibtn" id="btnGuide" data-icon="help" data-tip-t="guideTip" data-aria-t="guide"></button>
+      <button type="button" class="ibtn" id="btnSet" data-icon="gear" data-tip-t="settings" data-aria-t="settings"></button>
+      <select class="sel" id="langSel" data-aria-t="language"></select>
+      <div class="seg theme" id="themeSeg"></div>
+    </div>
+  </div>
+</header>
+<p id="ownerNote" class="wrap msg" hidden data-t="notOwner"></p>
+
+<main>
+  <section id="v-appraise" class="view">
+    <div class="wrap ap-grid">
+      <form id="apForm" class="panel ap-form" novalidate>
+        <div class="ap-head"><h2 id="apTitle">Nouvelle expertise</h2><span id="apLinked" class="linked" hidden></span></div>
+        <div class="fld"><span class="lab" data-t="fKind"></span><div class="seg" id="apKind"></div></div>
+        <div class="fgrid">
+          <label class="fld"><span class="lab"><span data-t="fCountry"></span><span class="isob" id="apIso"></span></span><input id="apCountry" type="text" data-ph="phCountry" list="dlCountries" autocomplete="off"></label>
+          <label class="fld"><span class="lab" data-t="fYear"></span><input id="apYear" type="text" data-ph="phYear" autocomplete="off"></label>
+          <label class="fld"><span class="lab" data-t="fDenom"></span><input id="apDenom" type="text" data-ph="phDenom" autocomplete="off"></label>
+          <label class="fld"><span class="lab" id="apMarkLab"></span><input id="apMark" type="text" autocomplete="off"></label>
+          <label class="fld"><span class="lab" data-t="fMaterial"></span><select id="apMaterial"></select></label>
+          <div class="fld"><span class="lab"><label for="apRefs" data-t="fRefs"></label><button type="button" class="tipi" data-tip-t="refsTip" data-aria-t="refsTip">i</button></span><input id="apRefs" type="text" data-ph="phRefs" autocomplete="off"></div>
+        </div>
+        <div class="fld"><span class="lab" data-t="fGrade"></span><div class="grades" id="apGrades"></div><p class="gdesc" id="apGdesc"></p></div>
+        <div class="fld"><span class="lab" data-t="fProbes"></span><div class="chips" id="apProbes"></div></div>
+        <label class="fld"><span class="lab" data-t="fNotes"></span><textarea id="apNotes" rows="2" data-ph="phNotes"></textarea></label>
+        <div class="fld"><span class="lab" data-t="fPhotos"></span><div class="photos" id="apPhotos"></div><p class="hintline" data-t="photoHint"></p></div>
+        <details class="more"><summary data-t="fSources"></summary><textarea id="apSources" rows="3" data-ph="sourcesHint" aria-label="Sources"></textarea></details>
+        <label class="checkline dblline" data-tip-t="dblTip"><input type="checkbox" id="apDbl"><span data-t="dblLabel"></span></label>
+        <div class="actions">
+          <button type="submit" class="btn pri" id="apGo" data-icon="spark"><span data-t="btnAppraise">Expertiser</span><kbd>Ctrl ↵</kbd></button>
+          <button type="button" class="btn" id="apStop" hidden><span data-t="btnStop"></span></button>
+          <button type="button" class="btn ghost" id="apReset"><span data-t="btnReset"></span></button>
+        </div>
+        <p class="msg" id="apMsg" role="status" aria-live="polite"></p>
+      </form>
+      <div class="sheet-pane" id="sheetPane" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="v-collection" class="view" hidden>
+    <div class="wrap">
+      <div class="ctool">
+        <label class="search"><span data-icon="search"></span><input id="cSearch" type="search" data-ph="searchPh" data-aria-t="searchPh" autocomplete="off"></label>
+        <div class="seg" id="cKind"></div>
+        <details class="fpop" id="cFilters"><summary class="btn" data-icon="filter"><span data-t="filters"></span><span class="fbadge" id="cFbadge"></span></summary><div class="panel fpop-body" id="cFbody"></div></details>
+        <select class="sel" id="cSort" data-aria-t="sort"></select>
+        <div class="seg" id="cView"></div>
+        <button type="button" class="btn" id="cLabels" data-icon="tag"><span data-t="lblBtn"></span></button>
+        <button type="button" class="btn pri" id="cNew" data-icon="plus"><span data-t="newItem"></span></button>
+      </div>
+      <div class="cstats" id="cStats"></div>
+      <div class="cbar"><span id="cCount"></span><div class="fchips" id="cChips"></div></div>
+      <div id="cResults"></div>
+    </div>
+  </section>
+
+  <section id="v-buy" class="view" hidden>
+    <div class="wrap buy-grid">
+      <div class="panel buy-card">
+        <h2 data-t="bTitle"></h2>
+        <label class="search big"><span data-icon="search"></span><input id="bQ" type="search" data-ph="bSearchPh" data-aria-t="bTitle" autocomplete="off" enterkeyhint="search"></label>
+        <div id="bRes" class="stack"></div>
+      </div>
+      <form id="bForm" class="panel buy-card" novalidate>
+        <h2 data-t="bQuick"></h2>
+        <label class="slot bslot" id="bPhoto"></label>
+        <div class="seg" id="bKind"></div>
+        <div class="fgrid">
+          <label class="fld"><span class="lab" data-t="fCountry"></span><input id="bCountry" type="text" list="dlCountries" autocomplete="off" data-ph="phCountry"></label>
+          <label class="fld"><span class="lab" data-t="fDenom"></span><input id="bDenom" type="text" autocomplete="off" data-ph="phDenom"></label>
+          <label class="fld"><span class="lab" data-t="fRefs"></span><input id="bRefs" type="text" autocomplete="off" data-ph="phRefs"></label>
+          <label class="fld"><span class="lab" data-t="fYear"></span><input id="bYear" type="text" inputmode="numeric" autocomplete="off"></label>
+        </div>
+        <div class="fld"><span class="lab" data-t="fGrade"></span><div class="grades" id="bGrades"></div></div>
+        <div class="fgrid">
+          <label class="fld"><span class="lab" data-t="bPrice"></span><input id="bPrice" type="number" step="0.01" min="0" inputmode="decimal"></label>
+          <label class="fld"><span class="lab" data-t="fPlace"></span><input id="bSeller" type="text" list="dlPlace" autocomplete="off"></label>
+          <label class="fld"><span class="lab" data-t="fStore"></span><input id="bStore" type="text" list="dlStore" autocomplete="off"></label>
+          <label class="fld"><span class="lab" data-t="fComment"></span><input id="bNote" type="text" autocomplete="off"></label>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn pri" data-icon="plus"><span data-t="bAdd"></span></button>
+          <button type="button" class="btn" id="bAddAppr" data-icon="spark"><span data-t="bAddAppraise"></span></button>
+        </div>
+        <p class="msg" id="bMsg" role="status" aria-live="polite"></p>
+      </form>
+      <div class="panel buy-card"><h2 data-t="bToday"></h2><div id="bRecent" class="stack"></div></div>
+    </div>
+  </section>
+
+  <section id="v-dash" class="view" hidden>
+    <div class="wrap"><div id="dashBody" class="dgrid"></div></div>
+  </section>
+
+  <section id="v-import" class="view" hidden>
+    <div class="wrap imp-grid">
+      <div class="panel imp-card">
+        <h2 data-t="impTitle"></h2>
+        <p class="muted" data-t="impHow"></p>
+        <label class="drop" id="impDrop"><span data-icon="upload"></span><span data-t="impDrop"></span><input type="file" id="impFile" accept=".csv,text/csv"></label>
+        <div id="impStep" class="stack"></div>
+      </div>
+      <div class="stack">
+        <div class="panel imp-card">
+          <h2 data-t="expTitle"></h2>
+          <div class="stack">
+            <button type="button" class="btn" id="expNumista" data-icon="download" data-tip-t="expNumistaTip"><span data-t="expNumista"></span></button>
+            <button type="button" class="btn" id="expFull" data-icon="download"><span data-t="expFull"></span></button>
+            <button type="button" class="btn" id="expJson" data-icon="download"><span data-t="expJson"></span></button>
+          </div>
+          <p class="msg" id="expMsg" role="status"></p>
+        </div>
+        <div class="panel imp-card">
+          <h2 data-t="restoreTitle"></h2>
+          <label class="btn" data-icon="upload"><span data-t="restoreTitle"></span><input type="file" id="restFile" class="sr" accept=".json,application/json"></label>
+          <p class="msg" id="restMsg" role="status"></p>
+        </div>
+        <div class="panel imp-card">
+          <h2 data-t="imgHelpTitle"></h2>
+          <p class="muted" data-t="imgHelp"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<datalist id="dlCountries"></datalist>
+<datalist id="dlStore"></datalist>
+<datalist id="dlPlace"></datalist>
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-labelledby="drTitle"></aside>
+
+<dialog class="dlg wide" id="dlgGuide" aria-labelledby="gdT">
+  <div class="dlg-head"><h2 id="gdT" data-t="gdTitle"></h2><button type="button" class="ibtn" data-close data-icon="close" data-aria-t="close"></button></div>
+  <div class="dlg-body" id="dlgGuideBody"></div>
+</dialog>
+<dialog class="dlg" id="dlgSet" aria-labelledby="setT">
+  <div class="dlg-head"><h2 id="setT" data-t="setTitle"></h2><button type="button" class="ibtn" data-close data-icon="close" data-aria-t="close"></button></div>
+  <div class="dlg-body" id="dlgSetBody"></div>
+</dialog>
+<dialog class="dlg wide" id="dlgAppr" aria-labelledby="apprT">
+  <div class="dlg-head"><h2 id="apprT" data-t="histView"></h2><button type="button" class="ibtn" data-close data-icon="close" data-aria-t="close"></button></div>
+  <div class="dlg-body" id="dlgApprBody"></div>
+</dialog>
+
+<dialog class="dlg" id="dlgLabels" aria-labelledby="lblT">
+  <div class="dlg-head"><h2 id="lblT" data-t="lblTitle"></h2><button type="button" class="ibtn" data-close data-icon="close" data-aria-t="close"></button></div>
+  <div class="dlg-body" id="dlgLabelsBody"></div>
+</dialog>
+
+<div id="tip" class="tip" hidden role="tooltip"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="cn-logic.js"></script>
+<script src="cn-i18n.js"></script>
+<script src="cn-i18n-ext.js"></script>
+<script src="cn-content.js"></script>
+<script src="cn-core.js"></script>
+<script src="cn-appraise.js"></script>
+<script src="cn-collection.js"></script>
+<script src="cn-io.js"></script>
+<script src="cn-dash.js"></script>
+<script src="cn-buy.js"></script>
+<script src="cn-labels.js"></script>
+<script src="cn-main.js"></script>

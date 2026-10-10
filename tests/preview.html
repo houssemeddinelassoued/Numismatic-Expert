@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<base href="../">
+<title>Cabinet Numismatique · aperçu local</title>
+<style>html,body{margin:0}</style>
+</head>
+<body>
+<script>
+/* Local preview: serve the project root over HTTP (python -m http.server) and open
+   /tests/preview.html?csv=tests/fixture.csv&tab=dash&lang=fr&theme=light */
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const html = await (await fetch("cabinet-numismatique.html")).text();
+  document.body.insertAdjacentHTML("afterbegin", html.replace(/<script[^>]*><\/script>/g, ""));
+  const load = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = () => rej(new Error(src)); document.body.append(s); });
+  await load("tests/mock-runtime.js");
+  await load("cn-logic.js");
+  await window.__seed(q.get("csv") || "tests/fixture.csv", { budget: Number(q.get("budget") || 0), lastBackup: 0, nsync: { ms: Date.now(), items: 0, prices: 0 } });
+  if (q.get("lang")) localStorage.setItem("cn:lang", JSON.stringify(q.get("lang")));
+  if (q.get("theme")) localStorage.setItem("cn:theme", JSON.stringify(q.get("theme")));
+  if (q.get("tab")) localStorage.setItem("cn:tab", JSON.stringify(q.get("tab")));
+  for (const f of ["cn-i18n.js", "cn-i18n-ext.js", "cn-content.js", "cn-core.js", "cn-appraise.js", "cn-collection.js", "cn-io.js", "cn-dash.js", "cn-buy.js", "cn-labels.js", "cn-main.js"]) await load(f);
+  if (q.get("open")) setTimeout(() => window.CN.openItem(q.get("open")), 1200);
+  if (q.get("search")) setTimeout(() => { const b = document.getElementById("bQ"); b.value = q.get("search"); b.dispatchEvent(new Event("input")); }, 900);
+})();
+</script>
+</body>
+</html>

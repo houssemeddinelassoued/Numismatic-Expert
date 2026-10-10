@@ -1,0 +1,15 @@
+{
+  "name": "cabinet-numismatique",
+  "version": "6.0.0",
+  "private": true,
+  "description": "Outil numismatique quotidien (FR · EN · AR) : expertise multi-sources, collection synchronisée avec Numista, tableau de bord, mode achat, étiquettes QR.",
+  "scripts": {
+    "test": "node tests/e2e.js",
+    "preview": "python -m http.server 8765 --bind 127.0.0.1",
+    "sync:pull": "node tools/numista_sync.js pull",
+    "sync": "node tools/numista_sync.js sync"
+  },
+  "devDependencies": {
+    "jsdom": "24.1.3"
+  }
+}

@@ -1,0 +1,16 @@
+# Personal data: never commit
+tests/.local/
+*.csv
+!tests/fixture.csv
+*.key
+*api-key*
+
+# Numista catalogue photos are licensed for private use only.
+# Regenerate them locally with tools/numista_photos.py.
+numista-photos/
+.mypics/
+
+# Tooling
+node_modules/
+*.log
+.DS_Store
