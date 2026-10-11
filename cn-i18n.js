@@ -4,7 +4,7 @@
   const CN = root.CN || (root.CN = {});
   CN.LANGS = ["fr", "en", "ar"];
   CN.T = {
-    brand: ["Cabinet Numismatique", "Numismatic Cabinet", "ديوان المسكوكات"],
+    brand: ["Expert Numismatique", "Numismatic Expert", "خبير المسكوكات"],
     tabAppraise: ["Expertiser", "Appraise", "تقييم"],
     tabCollection: ["Collection", "Collection", "المجموعة"],
     tabImport: ["Import / Export", "Import / Export", "استيراد / تصدير"],

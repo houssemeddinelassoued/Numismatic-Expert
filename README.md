@@ -1,4 +1,4 @@
-# Cabinet Numismatique
+# Expert Numismatique
 
 Outil de tous les jours pour gérer et expertiser une collection de pièces et de billets, en français, anglais ou arabe (une langue à la fois, arabe en lecture de droite à gauche). Il tourne comme un *artifact* privé sur claude.ai : la page, ses données et ses images y sont stockées, et Claude réalise les expertises depuis la page.
 
