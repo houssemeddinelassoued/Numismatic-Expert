@@ -10,7 +10,7 @@ const vc = new VirtualConsole();
 vc.on("jsdomError", (e) => { if (!/Not implemented/.test(e.message)) errors.push("jsdomError: " + e.message); });
 vc.on("error", (...a) => errors.push("console.error: " + a.map(String).join(" ")));
 vc.on("warn", (...a) => logs.push("warn: " + a.map(String).join(" ")));
-const html = fs.readFileSync(path.join(APP, "cabinet-numismatique.html"), "utf8").replace(/<script src="[^"]+"><\/script>/g, "");
+const html = fs.readFileSync(path.join(APP, "numismatic-expert.html"), "utf8").replace(/<script src="[^"]+"><\/script>/g, "");
 const dom = new JSDOM("<!doctype html><html><head></head><body>" + html + "</body></html>", { url: "https://claude.ai/artifact/test", pretendToBeVisual: true, virtualConsole: vc, runScripts: "outside-only" });
 const w = dom.window;
 w.TextEncoder = TextEncoder; w.TextDecoder = TextDecoder; w.scrollTo = () => {};

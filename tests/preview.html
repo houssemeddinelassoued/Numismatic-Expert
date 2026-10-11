@@ -13,7 +13,7 @@
    /tests/preview.html?csv=tests/fixture.csv&tab=dash&lang=fr&theme=light */
 (async () => {
   const q = new URLSearchParams(location.search);
-  const html = await (await fetch("cabinet-numismatique.html")).text();
+  const html = await (await fetch("numismatic-expert.html")).text();
   document.body.insertAdjacentHTML("afterbegin", html.replace(/<script[^>]*><\/script>/g, ""));
   const load = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = () => rej(new Error(src)); document.body.append(s); });
   await load("tests/mock-runtime.js");

@@ -17,7 +17,7 @@ Identifiant unique par objet : code pays ISO à 2 lettres + référence catalogu
 ## Structure
 
 ```
-cabinet-numismatique.html   page (squelette, onglets, dialogues)
+numismatic-expert.html      page (squelette, onglets, dialogues)
 cabinet.css, cabinet-ext.css
 cn-logic.js        logique pure : CSV, pays, identifiants, mapping Numista (testable sous Node)
 cn-i18n.js, cn-i18n-ext.js, cn-content.js   textes FR/EN/AR, grades, guide, glossaire
